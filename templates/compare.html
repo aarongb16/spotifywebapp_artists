@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Añadido para responsividad -->
+    <title>Comparación de Artistas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <h1>Comparación de Artistas en Spotify</h1>
+    
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i id="icon" class="fas fa-sun"></i> <!-- Icono inicial como sol -->
+    </button>
+
+    <!-- Formulario para ingresar los artistas -->
+    <form action="/compare" method="POST">
+        <label for="artist1">Artista 1:</label>
+        <input type="text" name="artist1" required placeholder="Ingresa el nombre del artista 1">
+        <label for="artist2">Artista 2:</label>
+        <input type="text" name="artist2" required placeholder="Ingresa el nombre del artista 2">
+        <button type="submit">Comparar</button>
+    </form>
+
+    <!-- Sección de resultados de la comparación -->
+    {% if artist1 and artist2 %}
+        <h2>Resultados de la Comparación</h2>
+        <div class="comparison-container">
+            <!-- Información del Artista 1 -->
+            <div class="artist-card">
+                <h3>{{ artist1['name'] }}</h3>
+                <img src="{{ artist1['image'] }}" alt="Imagen de {{ artist1['name'] }}" class="artist-image">
+                <p><strong>Seguidores:</strong> {{ artist1['followers'] }}</p>
+                <p><strong>Popularidad:</strong> {{ artist1['popularity'] }}</p>
+                <p><strong>Géneros:</strong> {{ artist1['genres'] | join(', ') }}</p>
+                <p><strong>Canción más escuchada:</strong> {{ artist1['top_track'] }}</p>
+                <p><strong>Último Lanzamiento:</strong> {{ artist1['releasedate_lastalbum'] }}</p>
+            </div>
+
+            <!-- Información del Artista 2 -->
+            <div class="artist-card">
+                <h3>{{ artist2['name'] }}</h3>
+                <img src="{{ artist2['image'] }}" alt="Imagen de {{ artist2['name'] }}" class="artist-image">
+                <p><strong>Seguidores:</strong> {{ artist2['followers'] }}</p>
+                <p><strong>Popularidad:</strong> {{ artist2['popularity'] }}</p>
+                <p><strong>Géneros:</strong> {{ artist2['genres'] | join(', ') }}</p>
+                <p><strong>Canción más escuchada:</strong> {{ artist2['top_track'] }}</p>
+                <p><strong>Último Lanzamiento:</strong> {{ artist2['releasedate_lastalbum'] }}</p>
+            </div>
+        </div>
+    {% else %}
+        <p>No se encontraron resultados para los artistas ingresados. Por favor, inténtalo de nuevo.</p>
+    {% endif %}
+    
+    <script>
+        const toggleButton = document.getElementById('themeToggle');
+        const icon = document.getElementById('icon');
+  
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+  
+            // Cambiar el icono dependiendo del tema
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-sun'); // Eliminar icono de sol
+                icon.classList.add('fa-moon');    // Agregar icono de luna
+            } else {
+                icon.classList.remove('fa-moon'); // Eliminar icono de luna
+                icon.classList.add('fa-sun');      // Agregar icono de sol
+            }
+        });
+    </script>
+</body>
+</html>
+
