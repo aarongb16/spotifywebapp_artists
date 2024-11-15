@@ -1,7 +1,7 @@
 # ComparadorDeArtistasSpotify
 Web App hecha en Flask que realiza endpoints a la API de Spotify para obtener información de dos artistas y compararlos.
 
-![Peek 2024-11-14 15-12](https://github.com/user-attachments/assets/9f708edf-c8aa-42fc-9bff-d16ca5bddd8a)
+![Peek 2024-11-14 16-18](https://github.com/user-attachments/assets/355e17ee-d9f8-4ad4-a778-296c1a3f0c23)
 
 ## Origen
 La idea original de la app se inspiró en el reto de programación de MoureDev, Oasis vs Linkin Park, donde se comparan las estadísticas de estos dos artistas mediante el uso de la API de Spotify, haciendo solicitudes con Python.
